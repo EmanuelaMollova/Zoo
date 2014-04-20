@@ -15,10 +15,10 @@ class Repository():
         return self.__connection.cursor()
 
     def commit_connection(self):
-        self.__conncetion.commit()
+        self.__connection.commit()
 
     def close_connection(self):
-        self.__conncetion.close()
+        self.__connection.close()
 
     def is_name_used(self, table, name):
         cursor = self.get_cursor()
