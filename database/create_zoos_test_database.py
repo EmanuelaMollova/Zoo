@@ -75,11 +75,13 @@ def insert_zoos_into_table(cursor, name, capacity, budget):
 
 
 def insert_animals_into_table(
-    cursor, name, age, gender, weight, is_alive, breed_after, species_id, zoo_id
+    cursor, name, age, gender, weight,
+    is_alive, breed_after, species_id, zoo_id
 ):
     insert_query = '''insert into
         animals(
-            name, age, gender, weight, is_alive, breed_after, species_id, zoo_id
+            name, age, gender, weight,
+            is_alive, breed_after, species_id, zoo_id
         ) values(?, ?, ?, ?, ?, ?, ?, ?)
     '''
 
