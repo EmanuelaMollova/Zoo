@@ -8,16 +8,29 @@ import unittest
 class ValidatorTest(unittest.TestCase):
 
     def setUp(self):
-        self.v = Validator()
+        self.v = Validator('../../database/zoos_test_database.db')
 
     def test_validate_name_returns_none_on_valid_name(self):
-        self.assertEqual(None, self.v.validate_name(2, 'aa'))
-        self.assertEqual(None, self.v.validate_name(0, 'aa'))
-        self.assertEqual(None, self.v.validate_name(1, 'a'))
+        self.assertEqual(None, self.v.validate_name(2, 'zoos', 'aa'))
+        self.assertEqual(None, self.v.validate_name(0, 'zoos', 'aa'))
+        self.assertEqual(None, self.v.validate_name(1, 'zoos', 'a'))
 
     def test_validate_name_raises_exception_on_invalid_name(self):
-        self.assertRaises(Exception, self.v.validate_name, 2, 'a')
-        self.assertRaises(Exception, self.v.validate_name, 1, '')
+        self.assertRaises(Exception, self.v.validate_name, 2, 'zoos', 'a')
+        self.assertRaises(Exception, self.v.validate_name, 1, 'zoos', '')
+
+    def test_validate_name_raises_exception_on_used_name(self):
+        self.assertRaises(
+            Exception, self.v.validate_name, 2, 'zoos', 'Zoo Sofia'
+        )
+
+        self.assertRaises(
+            Exception, self.v.validate_name, 2, 'animals', 'Nikky'
+        )
+
+        self.assertRaises(
+            Exception, self.v.validate_name, 2, 'species', 'lion'
+        )
 
     def test_validate_number_returns_none_on_valid_number(self):
         self.assertEqual(None, self.v.validate_number(1, 1, ''))

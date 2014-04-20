@@ -18,7 +18,7 @@ class Zoo(object):
 
     @name.setter
     def name(self, name):
-        self.__validator.validate_name(2, name)
+        self.__validator.validate_name(2, 'zoos', name)
         self.__name = name
 
     @property

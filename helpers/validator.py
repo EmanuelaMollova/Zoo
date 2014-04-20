@@ -1,8 +1,21 @@
+import sys
+sys.path.append('../../repository')
+
+from repository import Repository
+
+
 class Validator():
-    def validate_name(self, min_length, parameter):
+    def __init__(self, db_name='../../database/zoos.db'):
+        self.__db_name = db_name
+
+    def validate_name(self, min_length, model, parameter):
         if len(parameter) < min_length:
             message = "The name should be at least {} symbols"
             raise Exception(message.format(min_length))
+
+        repository = Repository(self.__db_name)
+        if repository.is_name_used(model, parameter):
+            raise Exception("This name is already taken")
 
     def validate_number(self, min_value, parameter, parameter_name):
         if isinstance(parameter, str):
